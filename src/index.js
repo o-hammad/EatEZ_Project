@@ -1,7 +1,15 @@
-import Example from "./scripts/example";
+import RenderPage from "./scripts/renderpage";
+import RenderResult from "./scripts/renderresult";
 
 document.addEventListener("DOMContentLoaded", () => {
-    // console.log('Hello from index.js');
     const main = document.getElementById("main");
-    new Example(main);
+    new RenderPage(main);
+
+    const dropdown = document.getElementById("cuisineType");
+
+    dropdown.addEventListener("change", function () {
+        const selectedOption = dropdown.value;
+
+        new RenderResult(selectedOption);
+    });
 })
