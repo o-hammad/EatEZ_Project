@@ -41,15 +41,21 @@ class RenderResult {
             const calories = document.createElement("li");
             calories.innerHTML = `Calories: ${recipe.calories}`;
             item.appendChild(calories);
-            // console.log('Ingredients: ');
-            // recipe.ingredients.forEach(ingredient => {
-            //     console.log(ingredient);
-            // });
+            const ingredients = document.createElement("li");
+            ingredients.innerHTML = 'Ingredients: ';
+            item.appendChild(ingredients);
+            const ingredientItems = document.createElement("ul");
+            ingredients.appendChild(ingredientItems);
+            item.appendChild(ingredients);
+            recipe.ingredients.forEach(ingredient => {
+                const recipeItem = document.createElement("li"); 
+                recipeItem.innerHTML = ingredient.text;
+                ingredientItems.appendChild(recipeItem);
+                console.log(ingredient);
+            });
             results.appendChild(item);
         });
     };
 };
-
-
 
 export default RenderResult;
