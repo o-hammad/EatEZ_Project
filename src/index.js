@@ -1,5 +1,5 @@
-import RenderPage from "./scripts/renderpage";
-import RenderResult from "./scripts/renderresult";
+import RenderPage from "./scripts/renderPage";
+import RenderResult from "./scripts/renderResult";
 
 document.addEventListener("DOMContentLoaded", () => {
     const main = document.getElementById("main");
@@ -10,6 +10,12 @@ document.addEventListener("DOMContentLoaded", () => {
     dropdown.addEventListener("change", function () {
         const selectedOption = dropdown.value;
 
-        new RenderResult(selectedOption);
+        if (!document.getElementById("results")) {
+            new RenderResult(selectedOption, main);
+        } else {
+            const currResults = document.getElementById("results");
+            currResults.remove();
+            new RenderResult(selectedOption, main);
+        };
     });
 })

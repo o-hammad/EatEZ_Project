@@ -3,10 +3,12 @@ class RenderPage {
         this.main = ele;
         // this.ele.innerHTML = "<h1>It's ALIVE!!</h1>";
         this.createHeader();
-        this.createSidebar();
+        this.createSidebar(ele);
         this.createFooter();
 
         this.main.addEventListener('click', this.handleClick.bind(this));
+
+        
     };
 
     handleClick() {
@@ -25,11 +27,11 @@ class RenderPage {
         document.body.appendChild(footer);
     }
 
-    createSidebar() {
+    createSidebar(ele) {
         //creation of sidebar container
         const sidebar = document.createElement("div");
         sidebar.id = "sidebar";
-        document.body.appendChild(sidebar);
+        ele.appendChild(sidebar);
 
         //creation of paragraph description in sidebar
         const description = document.createElement("p");
@@ -40,6 +42,7 @@ class RenderPage {
         const cuisine = document.createElement("select");
         cuisine.id = "cuisineType";
         
+        //creating the default cuising button
         const pleaseSelectCuisine = document.createElement("option");
         pleaseSelectCuisine.value = "";
         pleaseSelectCuisine.text = "Please select a Cuisine";
@@ -47,6 +50,7 @@ class RenderPage {
         pleaseSelectCuisine.selected = true;
         cuisine.appendChild(pleaseSelectCuisine);
 
+        //adding the cuisines to the dropdown
         let cuisines = ['American', 'Asian', 'British', 'Caribbean', 'Central Europe',
             'Chinese', 'Eastern Europe', 'French', 'Greek', 'Indian', 'Italian', 'Japanese',
             'Korean', 'Kosher', 'Mediterranean', 'Mexican', 'Middle Eastern', 'Nordic',
@@ -66,6 +70,7 @@ class RenderPage {
         const calories = document.createElement("select");
         calories.id = "calories";
 
+        //creating the default calorie selector
         const pleaseSelectCalories = document.createElement("option");
         pleaseSelectCalories.value = "";
         pleaseSelectCalories.text = "Please select a Calories Range";
