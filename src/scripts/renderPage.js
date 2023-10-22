@@ -76,16 +76,18 @@ class RenderPage {
         //creating the default calorie selector
         const pleaseSelectCalories = document.createElement("option");
         pleaseSelectCalories.value = "";
-        pleaseSelectCalories.text = "Please select a Calories Range";
+        pleaseSelectCalories.text = "Please Select Max Calories Required";
         pleaseSelectCalories.disabled = true;
         pleaseSelectCalories.selected = true;
         calories.appendChild(pleaseSelectCalories);
         
-        //test code
-        const test = document.createElement("option");
-        test.value = 500;
-        test.text = "test";
-        calories.append(test);
+        //calories range
+        for(let i = 500; i <= 3000; i += 500) {
+            let option = document.createElement("option");
+            option.value = `${i}`;
+            option.text = `${i} calories or less`;
+            calories.appendChild(option);
+        }
         
         form.appendChild(calories);
 
@@ -95,15 +97,15 @@ class RenderPage {
 
         const pleaseSelectProtein = document.createElement("option");
         pleaseSelectProtein.value = "";
-        pleaseSelectProtein.text = "Please select Protein %";
+        pleaseSelectProtein.text = "Please Select Minimum Protein in Grams";
         pleaseSelectProtein.disabled = true;
         pleaseSelectProtein.selected = true;
         protein.appendChild(pleaseSelectProtein);
 
-        for (let i = 10; i <= 100; i += 10) {
+        for (let i = 5; i <= 105; i += 10) {
             let option = document.createElement("option");
-            option.value = `option${i}`;
-            option.text = `${i} %`;
+            option.value = `${i}`;
+            option.text = `${i} grams or more`;
             protein.appendChild(option);
         };
 
@@ -115,15 +117,15 @@ class RenderPage {
 
         const pleaseSelectCarbs = document.createElement("option");
         pleaseSelectCarbs.value = "";
-        pleaseSelectCarbs.text = "Please select a Carbs %";
+        pleaseSelectCarbs.text = "Please Select Minimum Carbs in Grams";
         pleaseSelectCarbs.disabled = true;
         pleaseSelectCarbs.selected = true;
         carbs.appendChild(pleaseSelectCarbs);
 
-        for (let i = 20; i <= 100; i += 20) {
+        for (let i = 5; i <= 105; i += 10) {
             let option = document.createElement("option");
-            option.value = `option${i}`;
-            option.text = `${i} %`;
+            option.value = `${i}`;
+            option.text = `${i} grams or more`;
             carbs.appendChild(option);
         };
 
@@ -135,15 +137,15 @@ class RenderPage {
 
         const pleaseSelectFat = document.createElement("option");
         pleaseSelectFat.value = "";
-        pleaseSelectFat.text = "Please select a Fat %";
+        pleaseSelectFat.text = "Please Select Minimum Fat in Grams";
         pleaseSelectFat.disabled = true;
         pleaseSelectFat.selected = true;
         fat.appendChild(pleaseSelectFat);
 
-        for(let i = 20; i <= 100; i += 20) {
+        for (let i = 5; i <= 105; i += 10) {
             let option = document.createElement("option");
-            option.value = `option${i}`;
-            option.text = `${i} %`;
+            option.value = `${i}`;
+            option.text = `${i} grams or more`;
             fat.appendChild(option);
         };
 

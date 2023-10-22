@@ -1,7 +1,7 @@
 import PieGraph from "./pieGraph";
 
 class RenderResult {
-    constructor(selectedOption, main) {
+    constructor(selectedOption, main, inputtedFilters) {
         let currentData;
         
         this.getData(selectedOption)
@@ -9,7 +9,7 @@ class RenderResult {
                 console.log(data);
                 currentData = data;
                 const hits = data.hits;
-                this.renderData(hits, main);
+                this.renderData(hits, main, inputtedFilters);
             })
             .catch(error => {
                 console.log("Sorry, there was an error getting your data");
@@ -34,62 +34,83 @@ class RenderResult {
         return data;
     }
 
-    renderData(hits, main) {
+    renderData(hits, main, inputtedFilters) {
         const results = document.createElement("div");
         results.id = "results";
         main.appendChild(results);
+
+        if (inputtedFilters["calories"] === '') {
+            inputtedFilters["calories"] = 500;
+        };
+
+        if (inputtedFilters["protein"] === '') {
+            inputtedFilters["protein"] = 5;
+        };
+
+        if (inputtedFilters["carbs"] === '') {
+            inputtedFilters["carbs"] = 5;
+        };
+
+        if (inputtedFilters["fat"] === '') {
+            inputtedFilters["fat"] = 5;
+        };
 
         hits.forEach(hit => {
             //isolate item
             const recipe = hit.recipe;
             const item = document.createElement("ul");
-            
-            //render recipe label
-            const label = document.createElement("li");
-            label.innerHTML = `Recipe Label: ${recipe.label}`;
-            item.appendChild(label);
-            
-            //render small image
-            const image = document.createElement("img");
-            image.src = `${recipe.images.SMALL.url}`;
-            item.appendChild(image);
-            
-            //render calories for recipe
-            const calories = document.createElement("li");
-            calories.innerHTML = `Calories: ${recipe.calories}`;
-            item.appendChild(calories);
-
-            //creating an li for Nutrition Facts
-            const nutrition = document.createElement("li");
-            nutrition.innerHTML = 'Macro Nutrient Count: ';
-            item.appendChild(nutrition);
-            
-            //creating a ul for macro nutrients
-            const macroUl = document.createElement("ul");
-            nutrition.appendChild(macroUl);
-            
-            //creating an li for protein
-            const protein = document.createElement("li");
             const proteinQty = recipe.totalNutrients.PROCNT.quantity;
             const proteinUnit = recipe.totalNutrients.PROCNT.unit;
-            protein.innerHTML = `Protein: ${proteinQty} ${proteinUnit}`;
-            macroUl.appendChild(protein);
-
-            //creating an li for carbs
-            const carbs = document.createElement("li");
             const carbsQty = recipe.totalNutrients.CHOCDF.quantity;
             const carbsUnit = recipe.totalNutrients.CHOCDF.unit;
-            carbs.innerHTML = `Carbs: ${carbsQty} ${carbsUnit}`;
-            macroUl.appendChild(carbs);
-
-            //creating an li for fat
-            const fat = document.createElement("li");
             const fatQty = recipe.totalNutrients.FAT.quantity;
             const fatUnit = recipe.totalNutrients.FAT.unit;
-            fat.innerHTML = `Fat: ${fatQty} ${fatUnit}`;
-            macroUl.appendChild(fat);
-          
-            results.appendChild(item);
+
+
+            if (recipe.calories <= inputtedFilters["calories"] && proteinQty >= inputtedFilters["protein"] && 
+                carbsQty >= inputtedFilters["carbs"] && fatQty >= inputtedFilters["fat"]) {
+                
+                //render recipe label
+                const label = document.createElement("li");
+                label.innerHTML = `Recipe Label: ${recipe.label}`;
+                item.appendChild(label);
+
+                //render small image
+                const image = document.createElement("img");
+                image.src = `${recipe.images.SMALL.url}`;
+                item.appendChild(image);
+
+                //render calories for recipe
+                const calories = document.createElement("li");
+                calories.innerHTML = `Calories: ${recipe.calories}`;
+                item.appendChild(calories);
+
+                //creating an li for Nutrition Facts
+                const nutrition = document.createElement("li");
+                nutrition.innerHTML = 'Macro Nutrient Count: ';
+                item.appendChild(nutrition);
+
+                //creating a ul for macro nutrients
+                const macroUl = document.createElement("ul");
+                nutrition.appendChild(macroUl);
+
+                //creating an li for protein
+                const protein = document.createElement("li");
+                protein.innerHTML = `Protein: ${proteinQty} ${proteinUnit}`;
+                macroUl.appendChild(protein);
+
+                //creating an li for carbs
+                const carbs = document.createElement("li");
+                carbs.innerHTML = `Carbs: ${carbsQty} ${carbsUnit}`;
+                macroUl.appendChild(carbs);
+
+                //creating an li for fat
+                const fat = document.createElement("li");
+                fat.innerHTML = `Fat: ${fatQty} ${fatUnit}`;
+                macroUl.appendChild(fat);
+
+                results.appendChild(item);
+            };
         });
     };
 };
