@@ -2,16 +2,21 @@ import PieGraph from "./pieGraph";
 
 class RenderResult {
     constructor(selectedOption, main) {
+        let currentData;
+        
         this.getData(selectedOption)
             .then(data => {
                 console.log(data);
+                currentData = data;
                 const hits = data.hits;
                 this.renderData(hits, main);
             })
             .catch(error => {
                 console.log("Sorry, there was an error getting your data");
             })
-    }
+        
+        this.cuisineSelectedData = currentData;
+    };
 
     async getData(selectedOption) {
         let appId = "25aad07a";

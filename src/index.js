@@ -5,17 +5,36 @@ document.addEventListener("DOMContentLoaded", () => {
     const main = document.getElementById("main");
     new RenderPage(main);
 
-    const dropdown = document.getElementById("cuisineType");
+    const formFilterSubmission = document.getElementById("filterForm")
 
-    dropdown.addEventListener("change", function () {
-        const selectedOption = dropdown.value;
+    formFilterSubmission.addEventListener("submit", function(event) {
+        event.preventDefault();
 
-        if (!document.getElementById("results")) {
-            new RenderResult(selectedOption, main);
-        } else {
-            const currResults = document.getElementById("results");
-            currResults.remove();
-            new RenderResult(selectedOption, main);
-        };
+        const selectedCuisine = document.getElementById("cuisineTypeSelector");
+        const selectedCalories = document.getElementById("caloriesSelector");
+        const selectedProtein = document.getElementById("proteinSelector");
+        const selectedCarbs = document.getElementById("carbsSelector");
+        const selectedFat = document.getElementById("fatSelector");
+
+        console.log(`${selectedCuisine.value}`);
+        console.log(`${selectedCalories.value}`);
+        console.log(`${selectedProtein.value}`);
+        console.log(`${selectedCarbs.value}`);
+        console.log(`${selectedFat.value}`);
     });
-})
+
+
+    // const cuisineSelector = document.getElementById("cuisineTypeSelector");
+
+    // cuisineSelector.addEventListener("change", function () {
+    //     let selectedCuisine = cuisineSelector.value;
+
+    //     if (!document.getElementById("results")) {
+    //         new RenderResult(selectedCuisine, main);
+    //     } else {
+    //         const currResults = document.getElementById("results");
+    //         currResults.remove();
+    //         new RenderResult(selectedCuisine, main);
+    //     };       
+    // });
+});

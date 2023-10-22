@@ -7,8 +7,6 @@ class RenderPage {
         this.createFooter();
 
         this.main.addEventListener('click', this.handleClick.bind(this));
-
-        
     };
 
     handleClick() {
@@ -38,9 +36,14 @@ class RenderPage {
         description.textContent = "Paragraph Description";
         sidebar.appendChild(description);
         
+        //creation of a form to contain the filters
+        const form = document.createElement("form");
+        form.id = "filterForm"
+        sidebar.appendChild(form);
+
         //cuisine drop down in side nav
         const cuisine = document.createElement("select");
-        cuisine.id = "cuisineType";
+        cuisine.id = "cuisineTypeSelector";
         
         //creating the default cuising button
         const pleaseSelectCuisine = document.createElement("option");
@@ -64,11 +67,11 @@ class RenderPage {
             cuisine.appendChild(option);
         })
 
-        sidebar.appendChild(cuisine);
+        form.appendChild(cuisine);
 
         //creation of calories selector
         const calories = document.createElement("select");
-        calories.id = "calories";
+        calories.id = "caloriesSelector";
 
         //creating the default calorie selector
         const pleaseSelectCalories = document.createElement("option");
@@ -77,11 +80,18 @@ class RenderPage {
         pleaseSelectCalories.disabled = true;
         pleaseSelectCalories.selected = true;
         calories.appendChild(pleaseSelectCalories);
-        sidebar.appendChild(calories);
+        
+        //test code
+        const test = document.createElement("option");
+        test.value = 500;
+        test.text = "test";
+        calories.append(test);
+        
+        form.appendChild(calories);
 
         //creation of total daily protein requirement
         const protein = document.createElement("select");
-        protein.id = "protein";
+        protein.id = "proteinSelector";
 
         const pleaseSelectProtein = document.createElement("option");
         pleaseSelectProtein.value = "";
@@ -90,18 +100,18 @@ class RenderPage {
         pleaseSelectProtein.selected = true;
         protein.appendChild(pleaseSelectProtein);
 
-        for (let i = 20; i <= 100; i += 20) {
+        for (let i = 10; i <= 100; i += 10) {
             let option = document.createElement("option");
             option.value = `option${i}`;
             option.text = `${i} %`;
             protein.appendChild(option);
         };
 
-        sidebar.appendChild(protein);
+        form.appendChild(protein);
 
         //creation of total daily carb requirement
         const carbs = document.createElement("select");
-        carbs.id = "carbs";
+        carbs.id = "carbsSelector";
 
         const pleaseSelectCarbs = document.createElement("option");
         pleaseSelectCarbs.value = "";
@@ -117,11 +127,11 @@ class RenderPage {
             carbs.appendChild(option);
         };
 
-        sidebar.appendChild(carbs);
+        form.appendChild(carbs);
 
         //creation of total daily fat requirement
         const fat = document.createElement("select");
-        fat.id = "fat";
+        fat.id = "fatSelector";
 
         const pleaseSelectFat = document.createElement("option");
         pleaseSelectFat.value = "";
@@ -137,7 +147,12 @@ class RenderPage {
             fat.appendChild(option);
         };
 
-        sidebar.appendChild(fat);
+        form.appendChild(fat);
+
+        const searchButton = document.createElement("input");
+        searchButton.type = "submit";
+        searchButton.value = "Search";
+        form.appendChild(searchButton);
     };
 };
 
