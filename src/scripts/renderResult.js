@@ -1,21 +1,15 @@
 import PieGraph from "./pieGraph";
 
 class RenderResult {
-    constructor(selectedOption, main, inputtedFilters) {
-        let currentData;
-        
+    constructor(selectedOption, main, inputtedFilters) {        
         this.getData(selectedOption)
             .then(data => {
-                console.log(data);
-                currentData = data;
                 const hits = data.hits;
                 this.renderData(hits, main, inputtedFilters);
             })
             .catch(error => {
                 console.log("Sorry, there was an error getting your data");
             })
-        
-        this.cuisineSelectedData = currentData;
     };
 
     async getData(selectedOption) {
@@ -38,6 +32,7 @@ class RenderResult {
         const results = document.createElement("div");
         results.id = "results";
         main.appendChild(results);
+        let pieChartCounter = 1;
 
         if (inputtedFilters["calories"] === '') {
             inputtedFilters["calories"] = 500;
@@ -74,6 +69,8 @@ class RenderResult {
                 //render recipe label
                 const label = document.createElement("li");
                 label.innerHTML = `${recipe.label}`;
+                label.className = 'resultLabel';
+                label.id = `${recipe.label}`;
                 item.appendChild(label);
 
                 //render small image
@@ -110,6 +107,67 @@ class RenderResult {
                 fat.innerHTML = `Fat: ${fatQty} ${fatUnit}`;
                 macroUl.appendChild(fat);
 
+                //creating a ul pie chart container
+                const pieChartContainerId = `pie-chart-container`;
+                pieChartCounter++;
+                const pieChartContainer = document.createElement("div");
+                pieChartContainer.id = pieChartContainerId;
+                item.appendChild(pieChartContainer);
+
+                var data = [
+                    { nutrient: 'Protein', value: proteinQty },
+                    { nutrient: 'Fat', value: fatQty },
+                    { nutrient: 'Carbs', value: carbsQty },
+                ];
+
+                var width = 100;
+                var height = 100;
+                var radius = Math.min(width, height) / 2;
+                var innerRadius = 10; // Adjust this to control the size of the hole.
+
+                var svg = d3.select(`#${pieChartContainerId}`)
+                    .append('svg')
+                    .attr('width', width)
+                    .attr('height', height)
+                    .append('g')
+                    .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')');
+
+                var pie = d3.pie()
+                    .value(function (d) {
+                        return d.value;
+                    });
+
+                var arc = d3.arc()
+                    .innerRadius(innerRadius) // Inner radius to create the hole
+                    .outerRadius(radius);
+
+                var arcs = svg.selectAll('arc')
+                    .data(pie(data))
+                    .enter()
+                    .append('g');
+
+                arcs.append('path')
+                    .attr('d', arc)
+                    .attr('fill', function (d) {
+                        if (d.data.nutrient === 'Protein') {
+                            return 'blue';
+                        } else if (d.data.nutrient === 'Fat') {
+                            return 'green';
+                        } else {
+                            return 'red';
+                        }
+                    });
+
+                arcs.append('text')
+                    .attr('transform', function (d) {
+                        return 'translate(' + arc.centroid(d) + ')';
+                    })
+                    .attr('text-anchor', 'middle')
+                    .text(function (d) {
+                        return d.data.nutrient;
+                    });
+
+                debugger
                 results.appendChild(item);
             };
         });

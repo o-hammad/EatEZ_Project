@@ -1,5 +1,6 @@
 import RenderPage from "./scripts/renderPage";
 import RenderResult from "./scripts/renderResult";
+import RenderRecipe from "./scripts/renderRecipe";
 
 document.addEventListener("DOMContentLoaded", () => {
     const main = document.getElementById("main");
@@ -30,5 +31,17 @@ document.addEventListener("DOMContentLoaded", () => {
             currResults.remove();
             new RenderResult(selectedCuisine.value, main, inputtedFilters);
         };
+    });
+
+    document.addEventListener("click", function (event) {
+        const target = event.target;
+        if (target.closest("#results")) {
+            if (target.className === 'resultLabel') {
+                // console.log(target.id);
+                const currResults = document.getElementById("results");
+                currResults.remove();
+                new RenderRecipe(target.id);
+            }
+        }
     });
 });

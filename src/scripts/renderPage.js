@@ -1,7 +1,6 @@
 class RenderPage {
     constructor(ele){
         this.main = ele;
-        // this.ele.innerHTML = "<h1>It's ALIVE!!</h1>";
         this.createHeader();
         this.createSidebar(ele);
         this.createFooter();
