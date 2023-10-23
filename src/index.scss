@@ -1,5 +1,4 @@
 @import "./styles/example.scss";
-
-#main {
-    color: purple;
-}
+@import "./styles/header.scss";
+@import "./styles/footer.scss";
+@import "./styles/main.scss";

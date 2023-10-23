@@ -29,21 +29,6 @@ document.addEventListener("DOMContentLoaded", () => {
             const currResults = document.getElementById("results");
             currResults.remove();
             new RenderResult(selectedCuisine.value, main, inputtedFilters);
-        };     
+        };
     });
-
-
-    // const cuisineSelector = document.getElementById("cuisineTypeSelector");
-
-    // cuisineSelector.addEventListener("change", function () {
-    //     let selectedCuisine = cuisineSelector.value;
-
-    //     if (!document.getElementById("results")) {
-    //         new RenderResult(selectedCuisine, main);
-    //     } else {
-    //         const currResults = document.getElementById("results");
-    //         currResults.remove();
-    //         new RenderResult(selectedCuisine, main);
-    //     };       
-    // });
 });

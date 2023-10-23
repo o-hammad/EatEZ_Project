@@ -15,13 +15,15 @@ class RenderPage {
 
     createHeader() {
         const header = document.createElement("header");
-        header.innerHTML = "<h1>Header</h1>";
+        const logo = document.createElement("img");
+        logo.src = "src/styles/EatEZLogo.jpg";
+        header.appendChild(logo);
         document.body.prepend(header);
     }
 
     createFooter() {
         const footer = document.createElement("footer");
-        footer.innerHTML = "<p>Footer</p>";
+        footer.innerHTML = "<p>2023 All Rights Reserved</p>";
         document.body.appendChild(footer);
     }
 
@@ -35,6 +37,8 @@ class RenderPage {
         const description = document.createElement("p");
         description.textContent = "Paragraph Description";
         sidebar.appendChild(description);
+        
+        description.style.marginBottom = "10px";
         
         //creation of a form to contain the filters
         const form = document.createElement("form");
@@ -68,6 +72,7 @@ class RenderPage {
         })
 
         form.appendChild(cuisine);
+        cuisine.style.marginBottom = "10px";
 
         //creation of calories selector
         const calories = document.createElement("select");
@@ -90,6 +95,7 @@ class RenderPage {
         }
         
         form.appendChild(calories);
+        calories.style.marginBottom = "10px";
 
         //creation of total daily protein requirement
         const protein = document.createElement("select");
@@ -110,6 +116,7 @@ class RenderPage {
         };
 
         form.appendChild(protein);
+        protein.style.marginBottom = "10px";
 
         //creation of total daily carb requirement
         const carbs = document.createElement("select");
@@ -131,6 +138,8 @@ class RenderPage {
 
         form.appendChild(carbs);
 
+        carbs.style.marginBottom = "10px";
+
         //creation of total daily fat requirement
         const fat = document.createElement("select");
         fat.id = "fatSelector";
@@ -150,6 +159,7 @@ class RenderPage {
         };
 
         form.appendChild(fat);
+        fat.style.marginBottom = "10px";
 
         const searchButton = document.createElement("input");
         searchButton.type = "submit";
