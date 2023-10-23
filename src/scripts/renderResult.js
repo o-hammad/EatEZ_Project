@@ -55,7 +55,7 @@ class RenderResult {
             inputtedFilters["fat"] = 5;
         };
 
-        hits.forEach(hit => {
+        hits.forEach((hit) => {
             //isolate item
             const recipe = hit.recipe;
             const item = document.createElement("ul");
@@ -108,6 +108,71 @@ class RenderResult {
                 const fat = document.createElement("li");
                 fat.innerHTML = `Fat: ${fatQty} ${fatUnit}`;
                 macroUl.appendChild(fat);
+
+                //creating an li to append the pie chart
+                const pieChartUl = document.createElement("li");
+                pieChartUl.innerHTML = "Pie Chart:";
+                macroUl.appendChild(pieChartUl);
+
+                //creating a ul pie chart container
+                const pieChartId = `pie-chart-container`;
+                const pieChartContainer = document.createElement("div");
+                pieChartContainer.id = pieChartId;
+                pieChartUl.appendChild(pieChartContainer);
+
+                var data = [
+                    { nutrient: 'Protein', value: proteinQty },
+                    { nutrient: 'Fat', value: fatQty },
+                    { nutrient: 'Carbs', value: carbsQty },
+                ];
+
+                var width = 100;
+                var height = 100;
+                var radius = Math.min(width, height) / 2;
+                var innerRadius = 10; // Adjust this to control the size of the hole.
+
+                var svg = d3.select(`#${pieChartId}`)
+                    .append('svg')
+                    .attr('width', width)
+                    .attr('height', height)
+                    .append('g')
+                    .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')');
+
+                var pie = d3.pie()
+                    .value(function (d) {
+                        return d.value;
+                    });
+
+                var arc = d3.arc()
+                    .innerRadius(innerRadius) // Inner radius to create the hole
+                    .outerRadius(radius);
+
+                var arcs = svg.selectAll('arc')
+                    .data(pie(data))
+                    .enter()
+                    .append('g');
+
+                arcs.append('path')
+                    .attr('d', arc)
+                    .attr('fill', function (d) {
+                        // Assign colors based on the nutrient, as in the previous example.
+                        if (d.data.nutrient === 'Protein') {
+                            return 'blue';
+                        } else if (d.data.nutrient === 'Fat') {
+                            return 'green';
+                        } else {
+                            return 'red';
+                        }
+                    });
+
+                arcs.append('text')
+                    .attr('transform', function (d) {
+                        return 'translate(' + arc.centroid(d) + ')';
+                    })
+                    .attr('text-anchor', 'middle')
+                    .text(function (d) {
+                        return d.data.nutrient;
+                    });
 
                 results.appendChild(item);
             };
