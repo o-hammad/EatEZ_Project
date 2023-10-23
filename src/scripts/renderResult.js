@@ -32,7 +32,6 @@ class RenderResult {
         const results = document.createElement("div");
         results.id = "results";
         main.appendChild(results);
-        let pieChartCounter = 1;
 
         if (inputtedFilters["calories"] === '') {
             inputtedFilters["calories"] = 500;
@@ -106,7 +105,7 @@ class RenderResult {
                 const fat = document.createElement("li");
                 fat.innerHTML = `Fat: ${fatQty} ${fatUnit}`;
                 macroUl.appendChild(fat);
-                
+
                 results.appendChild(item);
             };
         });
