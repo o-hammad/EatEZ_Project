@@ -5,6 +5,10 @@ class RenderResult {
         this.getData(selectedOption)
             .then(data => {
                 const hits = data.hits;
+                localStorage.clear();
+                let storedResults = JSON.stringify(hits);
+                localStorage.setItem('storedResult', storedResults);
+                // console.log(localStorage);
                 this.renderData(hits, main, inputtedFilters);
             })
             .catch(error => {
@@ -67,9 +71,12 @@ class RenderResult {
                 
                 //render recipe label
                 const label = document.createElement("li");
-                label.innerHTML = `${recipe.label}`;
-                label.className = 'resultLabel';
-                label.id = `${recipe.label}`;
+                const labelHeader = document.createElement("h3");
+                labelHeader.innerHTML = `${recipe.label}`;
+                labelHeader.style.cursor = "pointer";
+                labelHeader.className = 'resultLabel';
+                labelHeader.id = `${recipe.label}`;
+                label.appendChild(labelHeader);
                 item.appendChild(label);
 
                 //render small image
@@ -88,23 +95,23 @@ class RenderResult {
                 item.appendChild(nutrition);
 
                 //creating a ul for macro nutrients
-                const macroUl = document.createElement("ul");
-                nutrition.appendChild(macroUl);
+                // const macroUl = document.createElement("ul");
+                // nutrition.appendChild(macroUl);
 
                 //creating an li for protein
                 const protein = document.createElement("li");
                 protein.innerHTML = `Protein: ${proteinQty} ${proteinUnit}`;
-                macroUl.appendChild(protein);
+                item.appendChild(protein);
 
                 //creating an li for carbs
                 const carbs = document.createElement("li");
                 carbs.innerHTML = `Carbs: ${carbsQty} ${carbsUnit}`;
-                macroUl.appendChild(carbs);
+                item.appendChild(carbs);
 
                 //creating an li for fat
                 const fat = document.createElement("li");
                 fat.innerHTML = `Fat: ${fatQty} ${fatUnit}`;
-                macroUl.appendChild(fat);
+                item.appendChild(fat);
 
                 results.appendChild(item);
             };

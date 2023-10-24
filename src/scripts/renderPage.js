@@ -24,7 +24,7 @@ class RenderPage {
         const footer = document.createElement("footer");
         footer.innerHTML = "<p>2023 All Rights Reserved</p>";
         document.body.appendChild(footer);
-    }
+    }   
 
     createSidebar(ele) {
         //creation of sidebar container
@@ -33,12 +33,50 @@ class RenderPage {
         ele.appendChild(sidebar);
 
         //creation of paragraph description in sidebar
-        const description = document.createElement("p");
-        description.textContent = "Paragraph Description";
-        sidebar.appendChild(description);
+        const welcomeMessage = document.createElement("h2");
+        welcomeMessage.innerHTML = "Welcome to EatEZ!";
+        sidebar.appendChild(welcomeMessage);
         
-        description.style.marginBottom = "10px";
+        const descriptionPara1 = document.createElement("p");
+        descriptionPara1.textContent = 
+            "Here at EatEZ, we want to take the guess work out of preparing your own, " +
+            "healthy meals to satisfy your daily recommended macro-nutrient intake.";
+        sidebar.appendChild(descriptionPara1);
         
+        descriptionPara1.style.marginBottom = "10px";
+
+        const descriptionPara2 = document.createElement("p");
+        descriptionPara2.textContent = 
+            "With most of our recipes taking 20 minutes or less to prepare, " +
+            "which is faster than the wait time for take out, simply check our app for " +
+            "recipe inspiration and grab the items at your local store.";
+        sidebar.appendChild(descriptionPara2);
+
+        descriptionPara2.style.marginBottom = "10px";
+
+        const descriptionPara3 = document.createElement("p");
+        descriptionPara3.textContent = 
+            "To start, please use the below link to find your daily recommended macro-nutrient intake: "
+        sidebar.appendChild(descriptionPara3);
+
+        descriptionPara3.style.marginBottom = "5px";
+
+        const macroLink = document.createElement("a");
+        macroLink.href = "https://healthyeater.com/flexible-dieting-calculator";
+        macroLink.textContent = "Calculate recommended calories and macros here";
+        macroLink.target = "_blank";
+        sidebar.appendChild(macroLink);
+
+        macroLink.style.marginBottom = "10px";
+
+        const descriptionPara4 = document.createElement("p");
+        descriptionPara4.textContent = 
+            "Now that you have your total daily recommended calories and macronutrients, use the " +
+            "below filters to find a meal for you!";
+        sidebar.appendChild(descriptionPara4);
+
+        descriptionPara4.style.marginBottom = "10px";
+
         //creation of a form to contain the filters
         const form = document.createElement("form");
         form.id = "filterForm"
@@ -160,10 +198,20 @@ class RenderPage {
         form.appendChild(fat);
         fat.style.marginBottom = "10px";
 
+        const buttonContainer = document.createElement("div");
+        buttonContainer.style.display = "flex";
+        form.appendChild(buttonContainer);
+
         const searchButton = document.createElement("input");
         searchButton.type = "submit";
         searchButton.value = "Search";
-        form.appendChild(searchButton);
+        searchButton.style.marginRight = "10px";
+        buttonContainer.appendChild(searchButton);
+
+        const clearButton = document.createElement("input");
+        clearButton.type = "reset";
+        clearButton.value = "Clear";
+        buttonContainer.appendChild(clearButton);
     };
 };
 

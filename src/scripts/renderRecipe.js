@@ -2,37 +2,45 @@ import PieGraph from "./pieGraph";
 
 class RenderRecipe {
     constructor(recipeLabel) {
-        this.getData(recipeLabel)
-            .then(data => {
-                console.log(data)
-                const hits = data.hits;
-                this.renderData(hits, main, recipeLabel);
-            })
-            .catch(error => {
-                console.log("Sorry, there was an error getting your data");
-            })
-    };
-
-    async getData(recipeLabel) {
-        let appId = "25aad07a";
-        let appKey = "095c96548ed9957ef5de2298cd228fc4";
-        let url = `https://api.edamam.com/search?q=${recipeLabel}&app_id=${appId}&app_key=${appKey}`;
-
-        const response = await fetch(url);
-
-        if (!response.ok) {
-            throw new Error("Sorry, there was an error with the network");
-        }
-
-        const data = await response.json();
-
-        return data;
-    };
+        let arrayRetrieval = localStorage.getItem('storedResult');
+        let hits = JSON.parse(arrayRetrieval);
+        console.log(hits);
+        this.renderData(hits, recipeLabel);
+    }
     
-    renderData(hits, main, recipeLabel) {
-        const results = document.createElement("div");
-        results.id = "recipe";
-        main.appendChild(results);
+    // constructor(recipeLabel) {
+    //     this.getData(recipeLabel)
+    //         .then(data => {
+    //             console.log(data)
+    //             const hits = data.hits;
+    //             this.renderData(hits, main, recipeLabel);
+    //         })
+    //         .catch(error => {
+    //             console.log("Sorry, there was an error getting your data");
+    //         })
+    // };
+
+    // async getData(recipeLabel) {
+    //     let appId = "25aad07a";
+    //     let appKey = "095c96548ed9957ef5de2298cd228fc4";
+    //     let url = `https://api.edamam.com/search?q=${recipeLabel}&app_id=${appId}&app_key=${appKey}`;
+
+    //     const response = await fetch(url);
+
+    //     if (!response.ok) {
+    //         throw new Error("Sorry, there was an error with the network");
+    //     }
+
+    //     const data = await response.json();
+
+    //     return data;
+    // };
+    
+    renderData(hits, recipeLabel) {
+        const recipeDisplay = document.createElement("div");
+        recipeDisplay.id = "recipe";
+        recipeDisplay.style.width = "100%";
+        main.appendChild(recipeDisplay);
 
         hits.forEach(hit => {
             //isolate the recipe for each hit
@@ -46,29 +54,44 @@ class RenderRecipe {
 
             if (recipe.label === recipeLabel) {
                 //add the label
-                const label = document.createElement("li");
-                label.innerHTML = `${recipe.label}`;
-                results.appendChild(label);
-
-                // //render small image
-                // const image = document.createElement("img");
-                // image.src = `${recipe.image}`;
-                // item.appendChild(image);
+                const recipeLabelHeader = document.createElement("h2");
+                recipeLabelHeader.innerHTML = `${recipe.label}`;
+                recipeDisplay.appendChild(recipeLabelHeader);
 
                 //add the calories
-                const calories = document.createElement("li");
-                calories.innerHTML = `Calories: ${recipe.calories}`;
-                results.appendChild(calories);
+                const calories = document.createElement("p");
+                calories.textContent = `Calories: ${Math.floor(recipe.calories)}`;
+                recipeDisplay.appendChild(calories);
 
-                //add the ingredients li to add ingredients underneath
-                const ingredients = document.createElement("li");
-                ingredients.innerHTML = 'Ingredients: ';
-                results.appendChild(ingredients);
+                //create and image container
+                const recipeImages = document.createElement("div");
+                recipeImages.id = "recipeImages";
+                recipeDisplay.appendChild(recipeImages);
+
+                //render regular image
+                const image = document.createElement("img");
+                image.src = `${recipe.images.REGULAR.url}`;
+                image.style.marginRight = "50px";
+                recipeImages.appendChild(image);
+
+                //create a container for the ingredients and the nutrients
+                const ingredientNutrients = document.createElement("div");
+                ingredientNutrients.id = "recipeNutrientDisplay";
+                recipeDisplay.appendChild(ingredientNutrients);
+
+                //create a container for the ingredients
+                const recipeIngredients = document.createElement("div");
+                recipeIngredients.id = "recipeIngredients";
+                ingredientNutrients.appendChild(recipeIngredients);
+
+                //add a header for the ingredients
+                const ingredientsLabel = document.createElement("h3");
+                ingredientsLabel.textContent = 'Ingredients:';
+                recipeIngredients.appendChild(ingredientsLabel);
 
                 //add the ingredients ul
                 const ingredientItems = document.createElement("ul");
-                ingredients.appendChild(ingredientItems);
-                results.appendChild(ingredients);
+                recipeIngredients.appendChild(ingredientItems);
 
                 //add each ingredient
                 recipe.ingredients.forEach(ingredient => {
@@ -77,11 +100,42 @@ class RenderRecipe {
                     ingredientItems.appendChild(recipeItem);
                 });
 
+                //create a container for the nutrition facts
+                const nutritionFacts = document.createElement("div");
+                nutritionFacts.id = "nutritionFacts";
+                ingredientNutrients.appendChild(nutritionFacts);
+
+                for (const nutrientKey in recipe.totalNutrients) {
+                    const nutrient = recipe.totalNutrients[nutrientKey];
+                    const nutrientLine = document.createElement("div");
+                    nutrientLine.id = "nutrientLine";
+                    nutrientLine.style.display = "flex";
+                    nutrientLine.style.justifyContent = "space-between";
+                    const nutrientLabel = document.createElement("div");
+                    nutrientLabel.textContent = `${nutrient.label}`;
+                    nutrientLine.appendChild(nutrientLabel);
+                    const nutritionQty = document.createElement("div");
+                    nutritionQty.textContent = `${Math.floor(nutrient.quantity)} ${nutrient.unit}`;
+                    nutrientLine.appendChild(nutritionQty);
+                    nutritionFacts.appendChild(nutrientLine);
+                    // console.log(`${nutrient.label}: ${nutrient.quantity} ${nutrient.unit}`);
+                }
+
+                // recipe.totalNutrients.forEach(nutrient => {
+                //     const nutrientLine = document.createElement("div");
+                //     nutrientLine.id = "nutrientLine";
+                //     nutrientLine.style.display = "flex";
+                //     const nutrientLabel = document.createElement("div");
+                //     nutrientLabel.textContent = `${nutrient.label}`;
+                //     nutrientLine.appendChild(nutrientLabel);
+                //     nutritionFacts.appendChild(nutrientLine);
+                // });
+
                 //creating a ul pie chart container
                 const pieChartContainerId = `pie-chart-container`;
                 const pieChartContainer = document.createElement("div");
                 pieChartContainer.id = pieChartContainerId;
-                results.appendChild(pieChartContainer);
+                recipeImages.appendChild(pieChartContainer);
 
                 var data = [
                     { nutrient: 'Protein', value: proteinQty },
@@ -89,10 +143,10 @@ class RenderRecipe {
                     { nutrient: 'Carbs', value: carbsQty },
                 ];
 
-                var width = 100;
-                var height = 100;
+                var width = 300;
+                var height = 300;
                 var radius = Math.min(width, height) / 2;
-                var innerRadius = 10; // Adjust this to control the size of the hole.
+                var innerRadius = 75; // Adjust this to control the size of the hole.
 
                 var svg = d3.select(`#${pieChartContainerId}`)
                     .append('svg')
@@ -110,10 +164,30 @@ class RenderRecipe {
                     .innerRadius(innerRadius) // Inner radius to create the hole
                     .outerRadius(radius);
 
+                const toolTip = document.createElement("div");
+                toolTip.style.display = "none";
+                toolTip.style.position = "absolute";
+                toolTip.id = "toolTip";
+                toolTip.innerText = "toolTip";
+                toolTip.style.backgroundColor = "white";
+                toolTip.style.cursor = "none";
+                toolTip.style.userSelect = "none";
+                main.appendChild(toolTip);
+
                 var arcs = svg.selectAll('arc')
                     .data(pie(data))
                     .enter()
-                    .append('g');
+                    .append('g')
+                    .on("mouseover", function (d, i) {
+                        debugger
+                        d3.select("#toolTip").style("display", "block")
+                            .style("left", event.pageX + "px")
+                            .style("top", event.pageY + "px")
+                            .text(i.value + "g")
+                    })
+                    .on("mouseout", function (d, i) {
+                        d3.select("#toolTip").style("display", "none");
+                    });
 
                 arcs.append('path')
                     .attr('d', arc)
@@ -125,8 +199,9 @@ class RenderRecipe {
                         } else {
                             return 'red';
                         }
-                    });
-
+                        
+                    })  
+                    
                 arcs.append('text')
                     .attr('transform', function (d) {
                         return 'translate(' + arc.centroid(d) + ')';
