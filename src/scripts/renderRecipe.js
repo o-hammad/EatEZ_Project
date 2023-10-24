@@ -53,26 +53,35 @@ class RenderRecipe {
             const fatUnit = recipe.totalNutrients.FAT.unit;
 
             if (recipe.label === recipeLabel) {
-                //add the label
-                const recipeLabelHeader = document.createElement("h2");
-                recipeLabelHeader.innerHTML = `${recipe.label}`;
-                recipeDisplay.appendChild(recipeLabelHeader);
-
-                //add the calories
-                const calories = document.createElement("p");
-                calories.textContent = `Calories: ${Math.floor(recipe.calories)}`;
-                recipeDisplay.appendChild(calories);
+                // //add the calories
+                // const calories = document.createElement("p");
+                // calories.textContent = `Calories: ${Math.floor(recipe.calories)}`;
+                // recipeDisplay.appendChild(calories);
 
                 //create and image container
                 const recipeImages = document.createElement("div");
                 recipeImages.id = "recipeImages";
                 recipeDisplay.appendChild(recipeImages);
 
+                //create a box for the right
+                const recipeImagesLeft = document.createElement("div");
+                recipeImagesLeft.id = "recipeImagesLeft";
+                recipeImages.appendChild(recipeImagesLeft);
+
+                //add the label
+                const recipeLabelHeader = document.createElement("h2");
+                recipeLabelHeader.innerHTML = `${recipe.label}`;
+                recipeImagesLeft.appendChild(recipeLabelHeader);
+
                 //render regular image
                 const image = document.createElement("img");
                 image.src = `${recipe.images.REGULAR.url}`;
-                image.style.marginRight = "50px";
-                recipeImages.appendChild(image);
+                image.id = "recipeImage";
+                recipeImagesLeft.appendChild(image);
+
+                //create a container for the right side of recipe image
+                const recipeImagesRight = document.createElement("div");
+                recipeImages.appendChild(recipeImagesRight);
 
                 //create a container for the ingredients and the nutrients
                 const ingredientNutrients = document.createElement("div");
@@ -82,7 +91,7 @@ class RenderRecipe {
                 //create a container for the ingredients
                 const recipeIngredients = document.createElement("div");
                 recipeIngredients.id = "recipeIngredients";
-                ingredientNutrients.appendChild(recipeIngredients);
+                recipeImagesRight.appendChild(recipeIngredients);
 
                 //add a header for the ingredients
                 const ingredientsLabel = document.createElement("h3");
@@ -105,6 +114,10 @@ class RenderRecipe {
                 nutritionFacts.id = "nutritionFacts";
                 ingredientNutrients.appendChild(nutritionFacts);
 
+                const nutritionLabel = document.createElement("h3");
+                nutritionLabel.textContent = 'Nutrition Facts:';
+                nutritionFacts.appendChild(nutritionLabel);
+
                 for (const nutrientKey in recipe.totalNutrients) {
                     const nutrient = recipe.totalNutrients[nutrientKey];
                     const nutrientLine = document.createElement("div");
@@ -121,6 +134,10 @@ class RenderRecipe {
                     // console.log(`${nutrient.label}: ${nutrient.quantity} ${nutrient.unit}`);
                 }
 
+                const blankLine = document.createElement("div");
+                blankLine.innerHTML = "'";
+                nutritionFacts.appendChild(blankLine);
+
                 // recipe.totalNutrients.forEach(nutrient => {
                 //     const nutrientLine = document.createElement("div");
                 //     nutrientLine.id = "nutrientLine";
@@ -135,7 +152,7 @@ class RenderRecipe {
                 const pieChartContainerId = `pie-chart-container`;
                 const pieChartContainer = document.createElement("div");
                 pieChartContainer.id = pieChartContainerId;
-                recipeImages.appendChild(pieChartContainer);
+                recipeImagesRight.appendChild(pieChartContainer);
 
                 var data = [
                     { nutrient: 'Protein', value: proteinQty },
@@ -168,8 +185,8 @@ class RenderRecipe {
                 toolTip.style.display = "none";
                 toolTip.style.position = "absolute";
                 toolTip.id = "toolTip";
-                toolTip.innerText = "toolTip";
-                toolTip.style.backgroundColor = "white";
+                // toolTip.innerText = "toolTip";
+                // toolTip.style.backgroundColor = "white";
                 toolTip.style.cursor = "none";
                 toolTip.style.userSelect = "none";
                 main.appendChild(toolTip);
@@ -179,7 +196,7 @@ class RenderRecipe {
                     .enter()
                     .append('g')
                     .on("mouseover", function (d, i) {
-                        debugger
+                        // debugger
                         d3.select("#toolTip").style("display", "block")
                             .style("left", event.pageX + "px")
                             .style("top", event.pageY + "px")
@@ -193,11 +210,11 @@ class RenderRecipe {
                     .attr('d', arc)
                     .attr('fill', function (d) {
                         if (d.data.nutrient === 'Protein') {
-                            return 'blue';
+                            return '#03fc6b';
                         } else if (d.data.nutrient === 'Fat') {
-                            return 'green';
+                            return '#fc3903';
                         } else {
-                            return 'red';
+                            return '#034afc';
                         }
                         
                     })  
