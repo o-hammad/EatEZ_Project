@@ -97,7 +97,7 @@ class RenderRecipe {
                 }
 
                 const blankLine = document.createElement("div");
-                blankLine.innerHTML = "'";
+                blankLine.style.height = "40px";
                 nutritionFacts.appendChild(blankLine);
 
                 //creating a ul pie chart container
