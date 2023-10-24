@@ -8,7 +8,6 @@ class RenderRecipe {
     renderData(hits, recipeLabel) {
         const recipeDisplay = document.createElement("div");
         recipeDisplay.id = "recipe";
-        recipeDisplay.style.width = "100%";
         main.appendChild(recipeDisplay);
 
         hits.forEach(hit => {
