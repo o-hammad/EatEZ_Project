@@ -4,13 +4,7 @@ class RenderPage {
         this.createHeader();
         this.createSidebar(ele);
         this.createFooter();
-
-        this.main.addEventListener('click', this.handleClick.bind(this));
     };
-
-    handleClick() {
-        // this.ele.children[0].innerText = 'Ouch!';
-    }
 
     createHeader() {
         const header = document.createElement("header");
