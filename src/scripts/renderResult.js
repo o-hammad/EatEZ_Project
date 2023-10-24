@@ -1,5 +1,3 @@
-import PieGraph from "./pieGraph";
-
 class RenderResult {
     constructor(selectedOption, main, inputtedFilters) {        
         this.getData(selectedOption)
