@@ -1,0 +1,31 @@
+#recipe {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#recipeImages {
+    display: flex;
+    justify-content: center;
+}
+
+#recipe * {
+    // border: 1px solid red;
+}
+
+#recipeNutrientDisplay {
+    display: flex;
+    justify-content: center;
+}
+
+#recipeIngredients {
+    margin-right: 60px;
+    width: 300px;
+}
+
+#nutritionFacts {
+    width: 300px;
+}
+
+h2 {
+    margin-top: 0px;
+    text-align: center;
+}

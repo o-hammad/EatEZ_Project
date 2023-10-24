@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const main = document.getElementById("main");
     new RenderPage(main);
 
-    const formFilterSubmission = document.getElementById("filterForm")
+    const formFilterSubmission = document.getElementById("filterForm");
 
     formFilterSubmission.addEventListener("submit", function(event) {
         event.preventDefault();
@@ -24,11 +24,16 @@ document.addEventListener("DOMContentLoaded", () => {
         inputtedFilters["carbs"] = selectedCarbs.value;
         inputtedFilters["fat"] = selectedFat.value;
 
-        if (!document.getElementById("results")) {
+        if (!document.getElementById("results") && !document.getElementById("recipe")) {
             new RenderResult(selectedCuisine.value, main, inputtedFilters);
         } else {
-            const currResults = document.getElementById("results");
-            currResults.remove();
+            if (document.getElementById("results")) {
+                const currResults = document.getElementById("results");
+                currResults.remove();
+            } else {
+                const currRecipe = document.getElementById("recipe");
+                currRecipe.remove();
+            }
             new RenderResult(selectedCuisine.value, main, inputtedFilters);
         };
     });
@@ -42,6 +47,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 currResults.remove();
                 new RenderRecipe(target.id);
             }
-        }
+        };
     });
 });
