@@ -132,8 +132,6 @@ class RenderRecipe {
                     .append('g')
                     .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')');
 
-                svg.id = "pie-chart";
-
                 const pie = d3.pie()
                     .value(function (d) {
                         return d.value;
