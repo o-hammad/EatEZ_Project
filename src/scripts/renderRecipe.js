@@ -164,43 +164,43 @@ class RenderRecipe {
                             .text(i.value + "g");
                         
                         //test
-                        if (d.data.nutrient === 'Protein') {
-                            proteinArc.transition()
-                                .duration(200)
-                                .attr("innerRadius", innerRadius + 30)
-                                .attr("outerRadius", radius + 30);
-                        } else if (d.data.nutrient === 'Fat') {
-                            fatArc.transition()
-                                .duration(200)
-                                .attr("innerRadius", innerRadius + 30)
-                                .attr("outerRadius", radius + 30);
-                        } else if (d.data.nutrient === 'Carbs') {
-                            carbsArc.transition()
-                                .duration(200)
-                                .attr("innerRadius", innerRadius + 30)
-                                .attr("outerRadius", radius + 30);
-                        }
+                        // if (i.data.nutrient === 'Protein') {
+                        //     proteinArc.transition()
+                        //         .duration(1000)
+                        //         .attr("innerRadius", innerRadius)
+                        //         .attr("outerRadius", radius + 30);
+                        // } else if (i.data.nutrient === 'Fat') {
+                        //     fatArc.transition()
+                        //         .duration(1000)
+                        //         .attr("innerRadius", innerRadius)
+                        //         .attr("outerRadius", radius + 30);
+                        // } else if (i.data.nutrient === 'Carbs') {
+                        //     carbsArc.transition()
+                        //         .duration(1000)
+                        //         .attr("innerRadius", innerRadius)
+                        //         .attr("outerRadius", radius + 30);
+                        // }
                     })
                     .on("mouseout", function (d, i) {
                         d3.select("#toolTip").style("display", "none");
 
                         //test
-                        if (d.data.nutrient === 'Protein') {
-                            proteinArc.transition()
-                                .duration(200)
-                                .attr("innerRadius", innerRadius)
-                                .attr("outerRadius", radius);
-                        } else if (d.data.nutrient === 'Fat') {
-                            fatArc.transition()
-                                .duration(200)
-                                .attr("innerRadius", innerRadius)
-                                .attr("outerRadius", radius);
-                        } else if (d.data.nutrient === 'Carbs') {
-                            carbsArc.transition()
-                                .duration(200)
-                                .attr("innerRadius", innerRadius)
-                                .attr("outerRadius", radius);
-                        }
+                        // if (i.data.nutrient === 'Protein') {
+                        //     proteinArc.transition()
+                        //         .duration(200)
+                        //         .attr("innerRadius", innerRadius)
+                        //         .attr("outerRadius", radius);
+                        // } else if (i.data.nutrient === 'Fat') {
+                        //     fatArc.transition()
+                        //         .duration(200)
+                        //         .attr("innerRadius", innerRadius)
+                        //         .attr("outerRadius", radius);
+                        // } else if (i.data.nutrient === 'Carbs') {
+                        //     carbsArc.transition()
+                        //         .duration(200)
+                        //         .attr("innerRadius", innerRadius)
+                        //         .attr("outerRadius", radius);
+                        // }
                     });
 
                 arcs.append('path')
@@ -216,15 +216,15 @@ class RenderRecipe {
                         
                     })
                     //test
-                    .each(function (d) {
-                        if (d.data.nutrient === 'Protein') {
-                            proteinArc = d3.select(this);
-                        } else if (d.data.nutrient === 'Fat') {
-                            fatArc = d3.select(this);
-                        } else if (d.data.nutrient === 'Carbs') {
-                            carbsArc = d3.select(this);
-                        }
-                    }); 
+                    // .each(function (d) {
+                    //     if (d.data.nutrient === 'Protein') {
+                    //         proteinArc = d3.select(this);
+                    //     } else if (d.data.nutrient === 'Fat') {
+                    //         fatArc = d3.select(this);
+                    //     } else if (d.data.nutrient === 'Carbs') {
+                    //         carbsArc = d3.select(this);
+                    //     }
+                    // }); 
                     
                 arcs.append('text')
                     .attr('transform', function (d) {
