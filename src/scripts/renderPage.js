@@ -202,11 +202,6 @@ class RenderPage {
         searchButton.style.marginRight = "10px";
         buttonContainer.appendChild(searchButton);
 
-        // const clearButton = document.createElement("input");
-        // clearButton.type = "reset";
-        // clearButton.value = "Clear";
-        // buttonContainer.appendChild(clearButton);
-
         buttonContainer.style.marginBottom = "10px";
 
         const linksContainer = document.createElement("div");

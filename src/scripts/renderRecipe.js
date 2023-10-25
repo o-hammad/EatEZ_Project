@@ -114,31 +114,33 @@ class RenderRecipe {
                 pieChartContainer.id = pieChartContainerId;
                 recipeImagesRight.appendChild(pieChartContainer);
 
-                var data = [
+                const data = [
                     { nutrient: 'Protein', value: proteinQty },
                     { nutrient: 'Fat', value: fatQty },
                     { nutrient: 'Carbs', value: carbsQty },
                 ];
 
-                var width = 300;
-                var height = 300;
-                var radius = Math.min(width, height) / 2;
-                var innerRadius = 60; // Adjust this to control the size of the hole.
-
-                var svg = d3.select(`#${pieChartContainerId}`)
+                const width = 250;
+                const height = 250;
+                const radius = Math.min(width, height) / 2;
+                const innerRadius = 45;
+                
+                const svg = d3.select(`#${pieChartContainerId}`)
                     .append('svg')
                     .attr('width', width)
                     .attr('height', height)
                     .append('g')
                     .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')');
 
-                var pie = d3.pie()
+                svg.id = "pie-chart";
+
+                const pie = d3.pie()
                     .value(function (d) {
                         return d.value;
                     });
 
-                var arc = d3.arc()
-                    .innerRadius(innerRadius) // Inner radius to create the hole
+                const arc = d3.arc()
+                    .innerRadius(innerRadius) 
                     .outerRadius(radius);
 
                 const toolTip = document.createElement("div");
@@ -151,7 +153,7 @@ class RenderRecipe {
 
                 var proteinArc, fatArc, carbsArc;
 
-                var arcs = svg.selectAll('arc')
+                const arcs = svg.selectAll('arc')
                     .data(pie(data))
                     .enter()
                     .append('g')
