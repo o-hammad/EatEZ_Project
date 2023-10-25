@@ -44,6 +44,7 @@ class RenderRecipe {
 
                 //create a container for the right side of recipe image
                 const recipeImagesRight = document.createElement("div");
+                recipeImagesRight.id = "recipeImagesRight";
                 recipeImages.appendChild(recipeImagesRight);
 
                 //create a container for the ingredients and the nutrients
@@ -55,15 +56,22 @@ class RenderRecipe {
                 const recipeIngredients = document.createElement("div");
                 recipeIngredients.id = "recipeIngredients";
                 recipeImagesRight.appendChild(recipeIngredients);
+                recipeIngredients.style.backgroundImage = 'url("src/assets/images/clipboard-307332_1920.png")';
+                recipeIngredients.style.backgroundSize = "100% 100%";
+
+                //create container for ingredients to fit inside clipboard
+                const recipeIngredientsText = document.createElement("div");
+                recipeIngredientsText.id = "recipeIngredientsText";
+                recipeIngredients.appendChild(recipeIngredientsText);
 
                 //add a header for the ingredients
                 const ingredientsLabel = document.createElement("h3");
                 ingredientsLabel.textContent = 'Ingredients:';
-                recipeIngredients.appendChild(ingredientsLabel);
+                recipeIngredientsText.appendChild(ingredientsLabel);
 
                 //add the ingredients ul
                 const ingredientItems = document.createElement("ul");
-                recipeIngredients.appendChild(ingredientItems);
+                recipeIngredientsText.appendChild(ingredientItems);
 
                 //add each ingredient
                 recipe.ingredients.forEach(ingredient => {
@@ -115,7 +123,7 @@ class RenderRecipe {
                 var width = 300;
                 var height = 300;
                 var radius = Math.min(width, height) / 2;
-                var innerRadius = 75; // Adjust this to control the size of the hole.
+                var innerRadius = 60; // Adjust this to control the size of the hole.
 
                 var svg = d3.select(`#${pieChartContainerId}`)
                     .append('svg')
@@ -141,6 +149,8 @@ class RenderRecipe {
                 toolTip.style.userSelect = "none";
                 main.appendChild(toolTip);
 
+                var proteinArc, fatArc, carbsArc;
+
                 var arcs = svg.selectAll('arc')
                     .data(pie(data))
                     .enter()
@@ -149,10 +159,46 @@ class RenderRecipe {
                         d3.select("#toolTip").style("display", "block")
                             .style("left", event.pageX + "px")
                             .style("top", event.pageY + "px")
-                            .text(i.value + "g")
+                            .text(i.value + "g");
+                        
+                        //test
+                        if (d.data.nutrient === 'Protein') {
+                            proteinArc.transition()
+                                .duration(200)
+                                .attr("innerRadius", innerRadius + 30)
+                                .attr("outerRadius", radius + 30);
+                        } else if (d.data.nutrient === 'Fat') {
+                            fatArc.transition()
+                                .duration(200)
+                                .attr("innerRadius", innerRadius + 30)
+                                .attr("outerRadius", radius + 30);
+                        } else if (d.data.nutrient === 'Carbs') {
+                            carbsArc.transition()
+                                .duration(200)
+                                .attr("innerRadius", innerRadius + 30)
+                                .attr("outerRadius", radius + 30);
+                        }
                     })
                     .on("mouseout", function (d, i) {
                         d3.select("#toolTip").style("display", "none");
+
+                        //test
+                        if (d.data.nutrient === 'Protein') {
+                            proteinArc.transition()
+                                .duration(200)
+                                .attr("innerRadius", innerRadius)
+                                .attr("outerRadius", radius);
+                        } else if (d.data.nutrient === 'Fat') {
+                            fatArc.transition()
+                                .duration(200)
+                                .attr("innerRadius", innerRadius)
+                                .attr("outerRadius", radius);
+                        } else if (d.data.nutrient === 'Carbs') {
+                            carbsArc.transition()
+                                .duration(200)
+                                .attr("innerRadius", innerRadius)
+                                .attr("outerRadius", radius);
+                        }
                     });
 
                 arcs.append('path')
@@ -166,7 +212,17 @@ class RenderRecipe {
                             return '#034afc';
                         }
                         
-                    })  
+                    })
+                    //test
+                    .each(function (d) {
+                        if (d.data.nutrient === 'Protein') {
+                            proteinArc = d3.select(this);
+                        } else if (d.data.nutrient === 'Fat') {
+                            fatArc = d3.select(this);
+                        } else if (d.data.nutrient === 'Carbs') {
+                            carbsArc = d3.select(this);
+                        }
+                    }); 
                     
                 arcs.append('text')
                     .attr('transform', function (d) {
@@ -175,7 +231,7 @@ class RenderRecipe {
                     .attr('text-anchor', 'middle')
                     .text(function (d) {
                         return d.data.nutrient;
-                    });
+                    });    
             };
         });
     };

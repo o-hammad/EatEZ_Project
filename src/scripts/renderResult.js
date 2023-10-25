@@ -90,6 +90,7 @@ class RenderResult {
                 //creating an li for Nutrition Facts
                 const nutrition = document.createElement("li");
                 nutrition.innerHTML = 'Macro Nutrient Count: ';
+                nutrition.id = "macroLabel";
                 item.appendChild(nutrition);
 
                 //creating a ul for macro nutrients

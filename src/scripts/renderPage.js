@@ -9,7 +9,7 @@ class RenderPage {
     createHeader() {
         const header = document.createElement("header");
         const logo = document.createElement("img");
-        logo.src = "src/styles/EatEZLogo.jpg";
+        logo.src = "src/assets/images/EatEZLogo.jpg";
         header.appendChild(logo);
         document.body.prepend(header);
     }
@@ -202,10 +202,35 @@ class RenderPage {
         searchButton.style.marginRight = "10px";
         buttonContainer.appendChild(searchButton);
 
-        const clearButton = document.createElement("input");
-        clearButton.type = "reset";
-        clearButton.value = "Clear";
-        buttonContainer.appendChild(clearButton);
+        // const clearButton = document.createElement("input");
+        // clearButton.type = "reset";
+        // clearButton.value = "Clear";
+        // buttonContainer.appendChild(clearButton);
+
+        buttonContainer.style.marginBottom = "10px";
+
+        const linksContainer = document.createElement("div");
+        sidebar.appendChild(linksContainer);
+
+        //create a github link
+        const gitHubLink = document.createElement("a");
+        linksContainer.appendChild(gitHubLink);
+        const gitHubIcon = document.createElement("img");
+        gitHubIcon.src = "src/assets/images/github-logo.png";
+        gitHubLink.appendChild(gitHubIcon);
+        gitHubLink.href = "https://github.com/o-hammad/EatEZ_Project.git";
+        gitHubLink.target = "_blank";
+        gitHubIcon.id = "gitHubIcon";
+        
+        //linkedin link
+        const linkedInLink = document.createElement("a");
+        linksContainer.appendChild(linkedInLink);
+        const linkedInIcon = document.createElement("img");
+        linkedInIcon.src = "src/assets/images/linkedinicon.png";
+        linkedInLink.appendChild(linkedInIcon);
+        linkedInLink.href = "https://www.linkedin.com/in/omar-hammad-93810413b/";
+        linkedInLink.target = "_blank";
+        linkedInIcon.id = "linkedInIcon";
     };
 };
 
