@@ -151,7 +151,7 @@ class RenderRecipe {
                 toolTip.style.userSelect = "none";
                 main.appendChild(toolTip);
 
-                var proteinArc, fatArc, carbsArc;
+                // var proteinArc, fatArc, carbsArc;
 
                 const arcs = svg.selectAll('arc')
                     .data(pie(data))
@@ -163,7 +163,7 @@ class RenderRecipe {
                             .style("top", event.pageY + "px")
                             .text(i.value + "g");
                         
-                        //test
+                        // // test
                         // if (i.data.nutrient === 'Protein') {
                         //     proteinArc.transition()
                         //         .duration(1000)
@@ -184,7 +184,7 @@ class RenderRecipe {
                     .on("mouseout", function (d, i) {
                         d3.select("#toolTip").style("display", "none");
 
-                        //test
+                        // //test
                         // if (i.data.nutrient === 'Protein') {
                         //     proteinArc.transition()
                         //         .duration(200)
@@ -215,8 +215,9 @@ class RenderRecipe {
                         }
                         
                     })
-                    //test
+                    // // test
                     // .each(function (d) {
+                    //     debugger
                     //     if (d.data.nutrient === 'Protein') {
                     //         proteinArc = d3.select(this);
                     //     } else if (d.data.nutrient === 'Fat') {
