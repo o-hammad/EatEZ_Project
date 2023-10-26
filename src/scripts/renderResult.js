@@ -9,8 +9,8 @@ class RenderResult {
                 this.renderData(hits, main, inputtedFilters);
             })
             .catch(error => {
-                // alert("Please enter a cuisine");
-                console.log("Sorry, there was an error getting your data");
+                alert("Please enter a cuisine");
+                // console.log("Sorry, there was an error getting your data");
             })
     };
 
@@ -22,7 +22,8 @@ class RenderResult {
         const response = await fetch(url);
 
         if (!response.ok) {
-            throw new Error("Sorry, there was an error with the network");
+            alert("Sorry, there was an error with the network")
+            // throw new Error("Sorry, there was an error with the network");
         }
 
         const data = await response.json();

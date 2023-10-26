@@ -57,5 +57,5 @@
 </p>
 <p>2. Internal calorie and macro-nutrient estimator
 </p>
-<p>3. Hover effect on pie chart to make the slices grow when hovered over
+<p>3. Input for daily recommended calories to appear in the nav bar
 </p>
