@@ -36,7 +36,7 @@ class RenderResult {
         main.appendChild(results);
 
         if (inputtedFilters["calories"] === '') {
-            inputtedFilters["calories"] = 500;
+            inputtedFilters["calories"] = 3000;
         };
 
         if (inputtedFilters["protein"] === '') {
