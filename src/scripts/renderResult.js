@@ -9,6 +9,7 @@ class RenderResult {
                 this.renderData(hits, main, inputtedFilters);
             })
             .catch(error => {
+                // alert("Please enter a cuisine");
                 console.log("Sorry, there was an error getting your data");
             })
     };
