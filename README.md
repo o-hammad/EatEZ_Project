@@ -1,62 +1,61 @@
-<h1>Final Proposal:</h1>
+<h1>EatEZ Production README</h1>
 
-<h2>Background</h2>
-<p>You're on your way home after work/school and you're hungry, but what do you eat?  Most meals take less than 30 minutes to prepare which is less than the wait time for most delivery options.  But even then, it is easy to eat unhealthy.  Based on a persons activity, there is a formula to determine the required caloric intake in a day.  You can easily log into our app, find your recommended caloric intake, and choose a healthy meal option which will display the ingredients you can pick up on your way home!  Funny thing, I was on my way home today and I even overheard a couple asking one another what they should make for dinner!  If my app was up and running, I'd say, EatEZ and visit EatEZ.com!
-</p>
+[Live Site](https://o-hammad.github.io/EatEZ_Project/)
 
-<h2>Functionality & MVPs</h2>
+<h2>Instructions:</h2>
 
-<p>In EatEZ, users will be able to:
+<p>Here at EatEZ, we want to take the guess work out of preparing your own, healthy meals to satisfy your daily recommended macro-nutrient intake.
 </p>
 
-<p>{ 4-6 core features or functionalities of your project }
+<p>With most of our recipes taking 20 minutes or less to prepare, which is faster than the wait time for take out, simply check our app for recipe inspiration and grab the items at your local store.
 </p>
 
-<p>- A way to determine your daily caloric intake
+<p>To start, please use the below link to find your daily recommended macro-nutrient intake:
 </p>
-<p>- Possibly a calculator to convert that into required macro nutrients
-</p>
-<p>- Filters for macro nutrients
-</p>
-<p>- Filters for your favorite type of cuisine
+    
+[Calorie Calculator](https://healthyeater.com/flexible-dieting-calculator)
+
+<p>Now that you have your total daily recommended calories and macronutrients, use the filters to find a meal tailored to your required macro-nutrient and caloric intake!
 </p>
 
-<p>In addition, this project will include:
+<h2>List of technologies / libraries / APIs used:</h2>
+<p>1. D3.js
 </p>
 
-<p>{ 2-4 other aspects of your project, including instructions & README }
-</p>
-<p>- If I have time, I would like to add a BMI calculator (either link or on the page itself)
-</p>
-<p>- I would like to incorporate infinte scroll
+<p>2. Edamam API
 </p>
 
-<h2>Wireframes</h2>
+<h2>Technical Implementation Details</h2>
 
-![Alt text](src/assets/images/image.png)
-
-<h2>Technologies, Libraries, APIs</h2>
-
-<p>I will be using the Edamam API.  This is an API whos free version allows you to look up 100 recipes at a time and returns things like ingredients, types of cuisine, calories, etc.  The drawback is that the free version doesn't have unlimited access to their database.  On the plus side, it is enough to create a working prototype of this app that I think will help a lot of people make healthy eating options.  I also might using d3 to render a graph of the macro nutrients in each recipe if I am able to get access to that data.
+<p>For the structuring of this site, I emmulated React by creating classes such that each class would render the various components of the page.  For example, when the DOM Content is loaded, the RenderPage class is initated.  In the constructor, I further broke down the landing page into smaller componenets like the header, footer and sidebar.  Below is a snippet of the constructor which creates those elements:
 </p>
 
-<h2>Implementation Timeline</h2>
+![Alt text](src/assets/images/render_page_constructor.png)
 
-<p>Here you will detail what you hope to get done each day for this project. It serves as a roadmap for the upcoming week. You'll have the following days to work on this project:
+<p>With regards to the API queries, I utilized an async function in my RenderResults which is initialized utilizing an event listener for submission of the search filters.  Here is a snippet of that function which is called in the RenderResult constructor:
 </p>
 
-<p>Friday Afternoon & Weekend: 
-Start by researching the API and be able to Parse the data
+![Alt text](src/assets/images/async_api_query.png)
+
+<p>To minimize the number of queries, make my code, and improve performance and efficiency, I stringified the query as a JSON and later retrieved it and parsed it to find the individual results when rendering the recipe as seen in the below code snippets: 
 </p>
-<p>Monday: 
-Create the HTML skeleton for the page
+
+![Alt text](src/assets/images/render_result_saving_data_to_local.png)
+![Alt text](src/assets/images/render_recipe_using_local_storage.png)
+
+<p>The final code snippet below illustrates the initalizing of a pie chart that uses a tool tip which when hovering over the respective "slices" of the pie chart shows the grams of the macro-nutrient available in the recipe:
 </p>
-<p>Tuesday: 
-Write the javascript to make the page interactive
+
+![Alt text](src/assets/images/render_recipe_creating_pie_chart.png)
+
+<h2>To-dos / future features</h2>
+
+<p>Future Features
 </p>
-<p>Wednesday: 
-Work on styling
+        
+<p>1. Clear button for search results
 </p>
-<p>Thursday Morning: 
-Tweaking as necessary
+<p>2. Internal calorie and macro-nutrient estimator
+</p>
+<p>3. Input for daily recommended calories to appear in the nav bar
 </p>
