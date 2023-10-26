@@ -19,7 +19,7 @@ In addition, this project will include:
 - I would like to incorporate infinte scroll
 
 Wireframes
- ![Alt text](image.png)
+ ![Alt text](src/assets/images/image.png)
 
 Technologies, Libraries, APIs
 I will be using the Edamam API.  This is an API whos free version allows you to look up 100 recipes at a time and returns things like ingredients, types of cuisine, calories, etc.  The drawback is that the free version doesn't have unlimited access to their database.  On the plus side, it is enough to create a working prototype of this app that I think will help a lot of people make healthy eating options.  I also might using d3 to render a graph of the macro nutrients in each recipe if I am able to get access to that data.

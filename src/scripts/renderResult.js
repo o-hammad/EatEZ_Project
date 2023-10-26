@@ -6,7 +6,6 @@ class RenderResult {
                 localStorage.clear();
                 let storedResults = JSON.stringify(hits);
                 localStorage.setItem('storedResult', storedResults);
-                // console.log(localStorage);
                 this.renderData(hits, main, inputtedFilters);
             })
             .catch(error => {
