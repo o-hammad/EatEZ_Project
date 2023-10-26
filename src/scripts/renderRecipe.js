@@ -124,6 +124,8 @@ class RenderRecipe {
                 const height = 250;
                 const radius = Math.min(width, height) / 2;
                 const innerRadius = 45;
+                const hoverArc = d3.arc().outerRadius(radius + 10).innerRadius(innerRadius);
+                const normalArc = d3.arc().outerRadius(radius).innerRadius(innerRadius);
                 
                 const svg = d3.select(`#${pieChartContainerId}`)
                     .append('svg')
@@ -157,8 +159,8 @@ class RenderRecipe {
                     .append('g')
                     .on("mouseover", function (d, i) {
                         d3.select("#toolTip").style("display", "block")
-                            .style("left", event.pageX + "px")
-                            .style("top", event.pageY + "px")
+                            .style("left", event.pageX + 2 + "px")
+                            .style("top", event.pageY + 2 + "px")
                             .text(i.value + "g");
                         
                         // // test
@@ -212,6 +214,14 @@ class RenderRecipe {
                             return '#034afc';
                         }
                         
+                    }).on('mouseover', function(d) {
+                        d3.select(this)
+                            .transition().duration(500)
+                            .attr('d', hoverArc);
+                    }) .on('mouseout', function (d) {
+                        d3.select(this)
+                            .transition().duration(500)
+                            .attr('d', normalArc);
                     })
                     // // test
                     // .each(function (d) {
