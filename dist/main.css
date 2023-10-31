@@ -1,3 +1,198 @@
-header{display:flex;justify-content:center;margin-bottom:30px}footer{display:flex;justify-content:center;font-family:Arial,Helvetica,sans-serif;font-size:12px}#main{display:flex}#sidebar{width:300px;font-family:Arial,Helvetica,sans-serif;font-size:12px}#results{flex-grow:1;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-start}#item{width:200px;display:flex;flex-direction:column;align-items:center;justify-content:center;list-style-type:none;font-family:Arial,Helvetica,sans-serif;font-size:12px;text-align:center}#item ul{text-align:center;list-style-type:none}#item li{text-align:center;font-size:medium}h3{margin-top:0px;height:50px}#macroLabel{font-weight:bold}#gitHubIcon{width:10%;margin-right:20px}#linkedInIcon{width:10%}#sidebar{display:flex;flex-direction:column}#sidebar p{justify-content:space-between}#linksContainer{display:flex;justify-content:center}#recipe{font-family:Arial,Helvetica,sans-serif;margin-left:10px;width:100%}#recipeImages{display:flex;justify-content:center}#recipeNutrientDisplay{display:flex;justify-content:center}#recipeIngredients{margin-right:45px;width:300px}h2{margin-top:0px;text-align:center}h3{text-align:center}#toolTip{font-size:50px;font-family:Arial,Helvetica,sans-serif}#nutritionFacts{border:5px solid #000;border-radius:5%;margin-right:0px;width:100%;font-size:35px;padding-left:15px;padding-right:15px}#recipeIngredients{margin-bottom:30px;border-radius:5%;margin-top:45px;font-family:cursive;font-size:medium;margin-right:0px}#recipeIngredients li{width:90%;font-family:cursive;font-size:small}#recipeIngredients h3{height:25px;margin-bottom:5px;margin-top:55px}#recipeIngredientsText{margin-bottom:80px;padding-top:40px}#nutrientLine{border-bottom:3px dotted #000}#recipeImages{margin-bottom:40px}#recipeImage{width:100%;border:3px solid #000}#nutritionFacts{margin-right:45px}#pie-chart-container{border-radius:5%;width:300px;display:flex;justify-content:center}#recipeImagesLeft{margin-right:30px;width:60%;max-height:100%}#recipeImagesRight{display:flex;flex-direction:column;justify-content:space-between}svg{overflow:visible}
+/*!*************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/sass-loader/dist/cjs.js!./src/index.scss ***!
+  \*************************************************************************************************************************************/
+header {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}
 
-/*# sourceMappingURL=main.css.map*/
+footer {
+  display: flex;
+  justify-content: center;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px;
+}
+
+#main {
+  display: flex;
+}
+
+#sidebar {
+  width: 300px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px;
+}
+
+#results {
+  flex-grow: 1;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+#item {
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  list-style-type: none;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  text-align: center;
+}
+
+#item ul {
+  text-align: center;
+  list-style-type: none;
+}
+
+#item li {
+  text-align: center;
+  font-size: medium;
+}
+
+h3 {
+  margin-top: 0px;
+  height: 50px;
+}
+
+#macroLabel {
+  font-weight: bold;
+}
+
+#gitHubIcon {
+  width: 10%;
+  margin-right: 20px;
+}
+
+#linkedInIcon {
+  width: 10%;
+}
+
+#sidebar {
+  display: flex;
+  flex-direction: column;
+}
+
+#sidebar p {
+  justify-content: space-between;
+}
+
+#linksContainer {
+  display: flex;
+  justify-content: center;
+}
+
+#recipe {
+  font-family: Arial, Helvetica, sans-serif;
+  margin-left: 10px;
+  width: 100%;
+}
+
+#recipeImages {
+  display: flex;
+  justify-content: center;
+}
+
+#recipeNutrientDisplay {
+  display: flex;
+  justify-content: center;
+}
+
+#recipeIngredients {
+  margin-right: 45px;
+  width: 300px;
+}
+
+h2 {
+  margin-top: 0px;
+  text-align: center;
+}
+
+h3 {
+  text-align: center;
+}
+
+#toolTip {
+  font-size: 50px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+#nutritionFacts {
+  border: 5px solid black;
+  border-radius: 5%;
+  margin-right: 0px;
+  width: 100%;
+  font-size: 35px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+#recipeIngredients {
+  margin-bottom: 30px;
+  border-radius: 5%;
+  margin-top: 45px;
+  font-family: cursive;
+  font-size: medium;
+  margin-right: 0px;
+}
+
+#recipeIngredients li {
+  width: 90%;
+  font-family: cursive;
+  font-size: small;
+}
+
+#recipeIngredients h3 {
+  height: 25px;
+  margin-bottom: 5px;
+  margin-top: 55px;
+}
+
+#recipeIngredientsText {
+  margin-bottom: 80px;
+  padding-top: 40px;
+}
+
+#nutrientLine {
+  border-bottom: 3px dotted black;
+}
+
+#recipeImages {
+  margin-bottom: 40px;
+}
+
+#recipeImage {
+  width: 100%;
+  border: 3px solid black;
+}
+
+#nutritionFacts {
+  margin-right: 45px;
+}
+
+#pie-chart-container {
+  border-radius: 5%;
+  width: 300px;
+  display: flex;
+  justify-content: center;
+}
+
+#recipeImagesLeft {
+  margin-right: 30px;
+  width: 60%;
+  max-height: 100%;
+}
+
+#recipeImagesRight {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+svg {
+  overflow: visible;
+}
